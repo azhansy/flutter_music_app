@@ -5,11 +5,11 @@ import 'package:flutter_music_app/model/song_model.dart';
 import 'package:provider/provider.dart';
 
 class RotatePlayer extends AnimatedWidget {
-  RotatePlayer({Key key, Animation<double> animation})
+  RotatePlayer({Key? key, required Animation<double> animation})
       : super(key: key, listenable: animation);
 
   Widget build(BuildContext context) {
-    final Animation<double> animation = listenable;
+    final Animation<double> animation = listenable as Animation<double>;
     SongModel songModel = Provider.of(context);
     return GestureDetector(
       onTap: () {},

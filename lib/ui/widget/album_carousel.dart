@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 class AlbumCarousel extends StatefulWidget {
   final String input;
-  AlbumCarousel({this.input});
+  AlbumCarousel({required this.input});
   @override
   _AlbumCarouselState createState() => _AlbumCarouselState();
 }
@@ -23,7 +23,7 @@ class _AlbumCarouselState extends State<AlbumCarousel> {
             borderRadius: BorderRadius.circular(12.0),
             child: Container(
                 decoration: BoxDecoration(
-                  color: Theme.of(context).accentColor.withAlpha(30),
+                  // color: Theme.of(context).accentColor.withAlpha(30),
                 ),
                 width: 50,
                 height: 50,
@@ -31,7 +31,7 @@ class _AlbumCarouselState extends State<AlbumCarousel> {
                     child: Text(
                   '$index',
                   style: TextStyle(
-                    color: Theme.of(context).accentColor,
+                    // color: Theme.of(context).accentColor,
                   ),
                 ))),
           ),
@@ -87,7 +87,7 @@ class _AlbumCarouselState extends State<AlbumCarousel> {
                   : favoriteModel.isCollect(data)
                       ? Icon(
                           Icons.favorite,
-                          color: Theme.of(context).accentColor,
+                          // color: Theme.of(context).accentColor,
                           size: 20.0,
                         )
                       : Icon(

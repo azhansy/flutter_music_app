@@ -54,7 +54,7 @@ abstract class ViewStateRefreshListModel<T> extends ViewStateListModel<T> {
       if (init) list.clear();
       refreshController.refreshFailed();
       setError(e, s);
-      return null;
+      return [];
     }
   }
 
@@ -81,7 +81,7 @@ abstract class ViewStateRefreshListModel<T> extends ViewStateListModel<T> {
       refreshController.loadFailed();
       debugPrint('error--->\n' + e.toString());
       debugPrint('statck--->\n' + s.toString());
-      return null;
+      return [];
     }
   }
 

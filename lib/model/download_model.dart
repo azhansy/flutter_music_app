@@ -16,7 +16,7 @@ const String kDirectoryPath = 'kDirectoryPath';
 class DownloadListModel extends ViewStateListModel<Song> {
   DownloadModel downloadModel;
 
-  DownloadListModel({this.downloadModel});
+  DownloadListModel({required this.downloadModel});
   @override
   Future<List<Song>> loadData() async {
     LocalStorage localStorage = LocalStorage(kLocalStorageSearch);
@@ -33,9 +33,9 @@ class DownloadListModel extends ViewStateListModel<Song> {
 
 class DownloadModel with ChangeNotifier {
   DownloadModel() {
-    _directoryPath = StorageManager.sharedPreferences.getString(kDirectoryPath);
+    _directoryPath = StorageManager.sharedPreferences?.getString(kDirectoryPath) ?? '';
   }
-  List<Song> _downloadSong;
+  late List<Song> _downloadSong;
   List<Song> get downloadSong => _downloadSong;
 
   setDownloads(List<Song> downloadSong) {
@@ -56,7 +56,7 @@ class DownloadModel with ChangeNotifier {
   }
 
   Future downloadFile(Song s) async {
-    final bytes = await readBytes(getSongUrl(s));
+    final bytes = await readBytes(Uri.parse(getSongUrl(s)));
     final dir = await getApplicationDocumentsDirectory();
     setDirectoryPath(dir.path);
     final file = File('${dir.path}/${s.songid}.mp3');
@@ -73,11 +73,11 @@ class DownloadModel with ChangeNotifier {
     }
   }
 
-  String _directoryPath;
+  late String _directoryPath;
   String get getDirectoryPath => _directoryPath;
   setDirectoryPath(String directoryPath) {
     _directoryPath = directoryPath;
-    StorageManager.sharedPreferences.setString(kDirectoryPath, _directoryPath);
+    StorageManager.sharedPreferences?.setString(kDirectoryPath, _directoryPath);
   }
 
   Future removeFile(Song s) async {
@@ -98,7 +98,7 @@ class DownloadModel with ChangeNotifier {
     localStorage.setItem(kDownloadList, _downloadSong);
   }
 
-  isDownload(Song newSong) {
+  bool isDownload(Song newSong) {
     bool isDownload = false;
     for (int i = 0; i < _downloadSong.length; i++) {
       if (_downloadSong[i].songid == newSong.songid) {

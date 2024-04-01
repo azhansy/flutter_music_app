@@ -6,14 +6,13 @@ import 'package:path_provider/path_provider.dart';
 
 class StorageManager {
   /// app全局配置 eg:theme
-  static SharedPreferences sharedPreferences;
+  static late SharedPreferences sharedPreferences;
 
   /// 临时目录 eg: cookie
-  static Directory temporaryDirectory;
-
+  static Directory? temporaryDirectory;
 
   /// 初始化必备操作 eg:user数据
-  static LocalStorage localStorage;
+  static late LocalStorage localStorage;
 
   /// 必备数据的初始化操作
   ///
@@ -24,6 +23,6 @@ class StorageManager {
     temporaryDirectory = await getTemporaryDirectory();
     sharedPreferences = await SharedPreferences.getInstance();
     localStorage = LocalStorage('LocalStorage');
-    await localStorage.ready;
+    await localStorage!.ready;
   }
 }

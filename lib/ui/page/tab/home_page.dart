@@ -18,8 +18,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
-  AnimationController controllerRecord;
-  Animation<double> animationRecord;
+  late AnimationController controllerRecord;
+  late Animation<double> animationRecord;
   final _inputController = TextEditingController();
   final _commonTween = new Tween<double>(begin: 0.0, end: 1.0);
 
@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage>
                   return ViewStateBusyWidget();
                 } else if (homeModel.error && homeModel.list.isEmpty) {
                   return ViewStateErrorWidget(
-                      error: homeModel.viewStateError,
+                      error: homeModel.viewStateError!,
                       onPressed: homeModel.initData);
                 }
                 var albums = homeModel?.albums ?? [];
@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage>
                               margin: EdgeInsets.symmetric(horizontal: 20.0),
                               decoration: BoxDecoration(
                                 color:
-                                    Theme.of(context).accentColor.withAlpha(50),
+                                    Theme.of(context).appBarTheme.foregroundColor?.withAlpha(50),
                                 borderRadius: BorderRadius.circular(30.0),
                               ),
                               child: TextField(

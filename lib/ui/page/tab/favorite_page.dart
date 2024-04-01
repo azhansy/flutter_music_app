@@ -80,7 +80,7 @@ class _FavoritePageState extends State<FavoritePage>
                   : favoriteModel.isCollect(data)
                       ? Icon(
                           Icons.favorite,
-                          color: Theme.of(context).accentColor,
+                          // color: Theme.of(context).accentColor,
                           size: 20.0,
                         )
                       : Icon(

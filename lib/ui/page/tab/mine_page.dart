@@ -13,8 +13,7 @@ class MinePage extends StatefulWidget {
   _MinePageState createState() => _MinePageState();
 }
 
-class _MinePageState extends State<MinePage>
-    with AutomaticKeepAliveClientMixin {
+class _MinePageState extends State<MinePage> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -29,10 +28,7 @@ class _MinePageState extends State<MinePage>
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Text(S.of(context).tabUser,
-                style: TextStyle(
-                    fontSize: 22.0,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.2)),
+                style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold, letterSpacing: 1.2)),
           ),
           Expanded(
             child: CustomScrollView(
@@ -50,7 +46,7 @@ class _MinePageState extends State<MinePage>
 class UserListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var iconColor = Theme.of(context).accentColor;
+    // var iconColor = Theme.of(context).accentColor;
     var localModel = Provider.of<LocaleModel>(context);
     return ListTileTheme(
       contentPadding: const EdgeInsets.symmetric(horizontal: 20),
@@ -64,14 +60,12 @@ class UserListWidget extends StatelessWidget {
             leading: Transform.rotate(
               angle: -pi,
               child: Icon(
-                Theme.of(context).brightness == Brightness.light
-                    ? Icons.brightness_5
-                    : Icons.brightness_2,
-                color: iconColor,
+                Theme.of(context).brightness == Brightness.light ? Icons.brightness_5 : Icons.brightness_2,
+                // color: iconColor,
               ),
             ),
             trailing: CupertinoSwitch(
-                activeColor: Theme.of(context).accentColor,
+                // activeColor: Theme.of(context).accentColor,
                 value: Theme.of(context).brightness == Brightness.dark,
                 onChanged: (value) {
                   switchDarkMode(context);
@@ -86,10 +80,10 @@ class UserListWidget extends StatelessWidget {
             },
             leading: Icon(
               Icons.public,
-              color: iconColor,
+              // color: iconColor,
             ),
             trailing: CupertinoSwitch(
-                activeColor: Theme.of(context).accentColor,
+                // activeColor: Theme.of(context).accentColor,
                 value: localModel.localeIndex == 0,
                 onChanged: (value) {
                   localModel.switchLocale();
@@ -104,8 +98,7 @@ class UserListWidget extends StatelessWidget {
     if (MediaQuery.of(context).platformBrightness == Brightness.dark) {
       showToast("检测到系统为暗黑模式,已为你自动切换", position: ToastPosition.bottom);
     } else {
-      Provider.of<ThemeModel>(context).switchTheme(
-          userDarkMode: Theme.of(context).brightness == Brightness.light);
+      Provider.of<ThemeModel>(context).switchTheme(userDarkMode: Theme.of(context).brightness == Brightness.light);
     }
   }
 }
@@ -119,7 +112,7 @@ class SettingThemeWidget extends StatelessWidget {
       title: Text(S.of(context).theme),
       leading: Icon(
         Icons.color_lens,
-        color: Theme.of(context).accentColor,
+        // color: Theme.of(context).accentColor,
       ),
       children: <Widget>[
         Padding(
@@ -153,14 +146,13 @@ class SettingThemeWidget extends StatelessWidget {
                   child: Container(
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                        border:
-                            Border.all(color: Theme.of(context).accentColor)),
+                      // border: Border.all(color: Theme.of(context).accentColor),
+                    ),
                     width: 40,
                     height: 40,
                     child: Text(
                       "?",
-                      style: TextStyle(
-                          fontSize: 20, color: Theme.of(context).accentColor),
+                      // style: TextStyle(fontSize: 20, color: Theme.of(context).accentColor),
                     ),
                   ),
                 ),

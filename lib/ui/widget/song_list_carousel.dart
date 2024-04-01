@@ -19,7 +19,7 @@ class _ForYouCarouselState extends State<SongListCarousel> {
               borderRadius: BorderRadius.circular(20.0),
               child: Container(
                 padding: EdgeInsets.all(10),
-                color: Theme.of(context).accentColor.withAlpha(90),
+                // color: Theme.of(context).accentColor.withAlpha(90),
                 child: Row(
                   children: <Widget>[
                     ClipRRect(
@@ -141,7 +141,7 @@ class _ForYouCarouselState extends State<SongListCarousel> {
                         : favoriteModel.isCollect(data)
                             ? Icon(
                                 Icons.favorite,
-                                color: Theme.of(context).accentColor,
+                                // color: Theme.of(context).accentColor,
                                 size: 20.0,
                               )
                             : Icon(

@@ -7,7 +7,7 @@ class LocaleModel extends ChangeNotifier {
   //
   static const kLocaleIndex = 'kLocaleIndex';
 
-  int _localeIndex;
+  late int _localeIndex;
 
   int get localeIndex => _localeIndex;
 

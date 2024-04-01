@@ -12,7 +12,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 class SearchPage extends StatefulWidget {
   final String input;
 
-  SearchPage({this.input});
+  SearchPage({required this.input});
   @override
   _SearchPageState createState() => _SearchPageState();
 }
@@ -109,7 +109,7 @@ class _SearchPageState extends State<SearchPage> {
                       return Center(child: Text('加载中...'));
                     } else if (model.error && model.list.isEmpty) {
                       return ViewStateErrorWidget(
-                          error: model.viewStateError,
+                          error: model.viewStateError!,
                           onPressed: model.initData);
                     } else if (model.empty) {
                       return ViewStateEmptyWidget(onPressed: model.initData);

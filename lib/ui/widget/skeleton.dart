@@ -7,7 +7,7 @@ class SkeletonBox extends StatelessWidget {
   final bool isCircle;
 
   SkeletonBox(
-      {@required this.width, @required this.height, this.isCircle: false});
+      {required this.width, required this.height, this.isCircle: false});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class SkeletonList extends StatelessWidget {
   SkeletonList(
       {this.length: 6, //一般屏幕长度够用
       this.padding = const EdgeInsets.all(7),
-      @required this.builder});
+      required this.builder});
 
   @override
   Widget build(BuildContext context) {

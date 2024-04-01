@@ -12,24 +12,22 @@ import 'package:provider/provider.dart';
 class PlayPage extends StatefulWidget {
   final bool nowPlay;
 
-  PlayPage({this.nowPlay});
+  PlayPage({required this.nowPlay});
 
   @override
   _PlayPageState createState() => _PlayPageState();
 }
 
 class _PlayPageState extends State<PlayPage> with TickerProviderStateMixin {
-  AnimationController controllerPlayer;
-  Animation<double> animationPlayer;
+  late AnimationController controllerPlayer;
+  late Animation<double> animationPlayer;
   final _commonTween = new Tween<double>(begin: 0.0, end: 1.0);
 
   @override
   initState() {
     super.initState();
-    controllerPlayer = new AnimationController(
-        duration: const Duration(milliseconds: 15000), vsync: this);
-    animationPlayer =
-        new CurvedAnimation(parent: controllerPlayer, curve: Curves.linear);
+    controllerPlayer = new AnimationController(duration: const Duration(milliseconds: 15000), vsync: this);
+    animationPlayer = new CurvedAnimation(parent: controllerPlayer, curve: Curves.linear);
     animationPlayer.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         controllerPlayer.repeat();
@@ -70,23 +68,15 @@ class _PlayPageState extends State<PlayPage> with TickerProviderStateMixin {
                       ? Column(
                           children: <Widget>[
                             AppBarCarousel(),
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.05),
-                            RotatePlayer(
-                                animation:
-                                    _commonTween.animate(controllerPlayer)),
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.03),
+                            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+                            RotatePlayer(animation: _commonTween.animate(controllerPlayer)),
+                            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
                             Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: <Widget>[
                                   IconButton(
-                                    onPressed: () => songModel
-                                        .setShowList(!songModel.showList),
+                                    onPressed: () => songModel.setShowList(!songModel.showList),
                                     icon: Icon(
                                       Icons.list,
                                       size: 25.0,
@@ -108,16 +98,12 @@ class _PlayPageState extends State<PlayPage> with TickerProviderStateMixin {
                                           ),
                                   ),
                                   IconButton(
-                                    onPressed: () => favouriteModel
-                                        .collect(songModel.currentSong),
-                                    icon: favouriteModel.isCollect(
-                                                songModel.currentSong) ==
-                                            true
+                                    onPressed: () => favouriteModel.collect(songModel.currentSong),
+                                    icon: favouriteModel.isCollect(songModel.currentSong) == true
                                         ? Icon(
                                             Icons.favorite,
                                             size: 25.0,
-                                            color:
-                                                Theme.of(context).accentColor,
+                                            color: Theme.of(context).appBarTheme.foregroundColor,
                                           )
                                         : Icon(
                                             Icons.favorite_border,
@@ -126,15 +112,12 @@ class _PlayPageState extends State<PlayPage> with TickerProviderStateMixin {
                                           ),
                                   ),
                                   IconButton(
-                                    onPressed: () => downloadModel
-                                        .download(songModel.currentSong),
-                                    icon: downloadModel
-                                            .isDownload(songModel.currentSong)
+                                    onPressed: () => downloadModel.download(songModel.currentSong),
+                                    icon: downloadModel.isDownload(songModel.currentSong)
                                         ? Icon(
                                             Icons.cloud_done,
                                             size: 25.0,
-                                            color:
-                                                Theme.of(context).accentColor,
+                                            color: Theme.of(context).appBarTheme.foregroundColor,
                                           )
                                         : Icon(
                                             Icons.cloud_download,
@@ -143,17 +126,12 @@ class _PlayPageState extends State<PlayPage> with TickerProviderStateMixin {
                                           ),
                                   ),
                                 ]),
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.02),
+                            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                             Text(
                               songModel.currentSong.author,
-                              style:
-                                  TextStyle(color: Colors.grey, fontSize: 15.0),
+                              style: TextStyle(color: Colors.grey, fontSize: 15.0),
                             ),
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.01),
+                            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                             Text(
                               songModel.currentSong.title,
                               style: TextStyle(fontSize: 20.0),

@@ -15,29 +15,29 @@ class ViewStateBusyWidget extends StatelessWidget {
 
 /// 基础Widget
 class ViewStateWidget extends StatelessWidget {
-  final String title;
-  final String message;
-  final Widget image;
-  final Widget buttonText;
-  final String buttonTextData;
+  final String? title;
+  final String? message;
+  final Widget? image;
+  final Widget? buttonText;
+  final String? buttonTextData;
   final VoidCallback onPressed;
 
   ViewStateWidget(
-      {Key key,
+      {Key? key,
       this.image,
       this.title,
       this.message,
       this.buttonText,
-      @required this.onPressed,
+      required this.onPressed,
       this.buttonTextData})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var titleStyle =
-        Theme.of(context).textTheme.subhead.copyWith(color: Colors.grey);
-    var messageStyle = titleStyle.copyWith(
-        color: titleStyle.color.withOpacity(0.7), fontSize: 14);
+        Theme.of(context).textTheme.subtitle1?.copyWith(color: Colors.grey);
+    var messageStyle = titleStyle?.copyWith(
+        color: titleStyle.color?.withOpacity(0.7), fontSize: 14);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -77,22 +77,22 @@ class ViewStateWidget extends StatelessWidget {
 
 class ViewStateErrorWidget extends StatelessWidget {
   final ViewStateError error;
-  final String title;
-  final String message;
-  final Widget image;
-  final Widget buttonText;
-  final String buttonTextData;
+  final String? title;
+  final String? message;
+  final Widget? image;
+  final Widget? buttonText;
+  final String? buttonTextData;
   final VoidCallback onPressed;
 
   const ViewStateErrorWidget({
-    Key key,
-    @required this.error,
+    Key? key,
+    required this.error,
     this.image,
     this.title,
     this.message,
     this.buttonText,
     this.buttonTextData,
-    @required this.onPressed,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -131,17 +131,17 @@ class ViewStateErrorWidget extends StatelessWidget {
 
 /// 页面无数据
 class ViewStateEmptyWidget extends StatelessWidget {
-  final String message;
-  final Widget image;
-  final Widget buttonText;
+  final String? message;
+  final Widget? image;
+  final Widget? buttonText;
   final VoidCallback onPressed;
 
   const ViewStateEmptyWidget(
-      {Key key,
+      {Key? key,
       this.image,
       this.message,
       this.buttonText,
-      @required this.onPressed})
+      required this.onPressed})
       : super(key: key);
 
   @override
@@ -160,24 +160,24 @@ class ViewStateEmptyWidget extends StatelessWidget {
 /// 公用Button
 class ViewStateButton extends StatelessWidget {
   final VoidCallback onPressed;
-  final Widget child;
-  final String textData;
+  final Widget? child;
+  final String? textData;
 
-  const ViewStateButton({@required this.onPressed, this.child, this.textData})
+  const ViewStateButton({required this.onPressed, this.child, this.textData})
       : assert(child == null || textData == null);
 
   @override
   Widget build(BuildContext context) {
-    return OutlineButton(
+    return TextButton(
       child: child ??
           Text(
             textData ?? S.of(context).viewStateButtonRetry,
             style: TextStyle(wordSpacing: 5),
           ),
-      textColor: Colors.grey,
-      splashColor: Theme.of(context).splashColor,
+      // textColor: Colors.grey,
+      // splashColor: Theme.of(context).splashColor,
       onPressed: onPressed,
-      highlightedBorderColor: Theme.of(context).splashColor,
+      // highlightedBorderColor: Theme.of(context).splashColor,
     );
   }
 }

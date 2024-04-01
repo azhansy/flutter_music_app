@@ -8,13 +8,13 @@ class HomeModel extends ViewStateRefreshListModel {
   static const albumValueList = ['酒吧', '怀旧', '女歌手', '经典', '热门'];
   static const forYouValueList = ['华语', '流行', '轻音乐', '排行榜', '抖音'];
 
-  List<Song> _albums;
-  List<Song> _forYou;
+  List<Song> _albums = [];
+  List<Song> _forYou = [];
   List<Song> get albums => _albums;
 
   List<Song> get forYou => _forYou;
   @override
-  Future<List<Song>> loadData({int pageNum}) async {
+  Future<List<Song>> loadData({int pageNum = 0}) async {
     List<Future> futures = [];
     Random r = new Random();
     int _randomSongAlbum = r.nextInt(albumValueList.length);

@@ -65,16 +65,16 @@ class PopRoute extends PopupRoute {
   final Duration _duration = Duration(milliseconds: 300);
   Widget child;
 
-  PopRoute({@required this.child});
+  PopRoute({required this.child});
 
   @override
-  Color get barrierColor => null;
+  Color get barrierColor => Colors.black.withOpacity(0.5);
 
   @override
   bool get barrierDismissible => true;
 
   @override
-  String get barrierLabel => null;
+  String get barrierLabel => '';
 
   @override
   Widget buildPage(BuildContext context, Animation<double> animation,

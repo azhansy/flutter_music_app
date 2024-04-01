@@ -11,7 +11,7 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
-  AnimationController _countdownController;
+  late AnimationController _countdownController;
 
   @override
   void initState() {
@@ -88,7 +88,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 class AnimatedCountdown extends AnimatedWidget {
   final Animation<int> animation;
 
-  AnimatedCountdown({key, this.animation, context})
+  AnimatedCountdown({key, required this.animation, context})
       : super(key: key, listenable: animation) {
     this.animation.addStatusListener((status) {
       if (status == AnimationStatus.completed) {

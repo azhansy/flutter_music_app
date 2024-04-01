@@ -14,7 +14,7 @@ class Player extends StatefulWidget {
   /// 音量
   final double volume;
 
-  final Key key;
+  final Key? key;
 
   final Color color;
 
@@ -22,27 +22,27 @@ class Player extends StatefulWidget {
   final bool isLocal;
 
   Player(
-      {@required this.songData,
-      @required this.downloadData,
-      this.nowPlay,
-      this.key,
-      this.volume: 1.0,
-      this.color: Colors.white,
-      this.isLocal: false});
+      {required this.songData,
+      required this.downloadData,
+        required this.nowPlay,
+         this.key,
+      this.volume= 1.0,
+      this.color=Colors.white,
+      this.isLocal= false});
 
   @override
-  State<StatefulWidget> createState() => PlayerState();
+  State<StatefulWidget> createState() => PlayerState1();
 }
 
-class PlayerState extends State<Player> {
-  Duration _duration;
-  Duration _position;
-  SongModel _songData;
-  DownloadModel _downloadData;
+class PlayerState1 extends State<Player> {
+  late Duration _duration;
+  late Duration _position;
+  late SongModel _songData;
+  late DownloadModel _downloadData;
   bool _isSeeking = false;
 
-  AudioPlayer _audioPlayer;
-  AudioPlayerState _audioPlayerState;
+  late AudioPlayer _audioPlayer;
+  PlayerState? _audioPlayerState;
 
   @override
   void initState() {
@@ -69,22 +69,22 @@ class PlayerState extends State<Player> {
       // TODO implemented for iOS, waiting for android impl
       if (Theme.of(context).platform == TargetPlatform.iOS) {
         // (Optional) listen for notification updates in the background
-        _audioPlayer.startHeadlessService();
+        // _audioPlayer.startHeadlessService();
 
         // set at least title to see the notification bar on ios.
-        _audioPlayer.setNotification(
-            title: _songData.currentSong.title,
-            artist: _songData.currentSong.author,
-            //albumTitle: 'Name or blank',
-            imageUrl: _songData.currentSong.pic,
-            forwardSkipInterval: const Duration(seconds: 30), // default is 30s
-            backwardSkipInterval: const Duration(seconds: 30), // default is 30s
-            duration: duration,
-            elapsedTime: Duration(seconds: 0));
+        // _audioPlayer.setNotification(
+        //     title: _songData.currentSong.title,
+        //     artist: _songData.currentSong.author,
+        //     //albumTitle: 'Name or blank',
+        //     imageUrl: _songData.currentSong.pic,
+        //     forwardSkipInterval: const Duration(seconds: 30), // default is 30s
+        //     backwardSkipInterval: const Duration(seconds: 30), // default is 30s
+        //     duration: duration,
+        //     elapsedTime: Duration(seconds: 0));
       }
     });
 
-    _audioPlayer.onAudioPositionChanged.listen((position) {
+    _audioPlayer.onPositionChanged.listen((position) {
       if (!mounted) return;
       if (_isSeeking) return;
       setState(() {
@@ -93,7 +93,7 @@ class PlayerState extends State<Player> {
       });
     });
 
-    _audioPlayer.onPlayerCompletion.listen((event) {
+    _audioPlayer.onPlayerComplete.listen((event) {
       // // _onComplete();
       // setState(() {
       //   _position = _duration;
@@ -105,30 +105,30 @@ class PlayerState extends State<Player> {
       _isSeeking = false;
     });
 
-    _audioPlayer.onPlayerError.listen((msg) {
-      if (!mounted) return;
-      print('audioPlayer error : $msg');
-      setState(() {
-        _duration = Duration(seconds: 0);
-        _position = Duration(seconds: 0);
-      });
-    });
+    // _audioPlayer.onPlayerError.listen((msg) {
+    //   if (!mounted) return;
+    //   print('audioPlayer error : $msg');
+    //   setState(() {
+    //     _duration = Duration(seconds: 0);
+    //     _position = Duration(seconds: 0);
+    //   });
+    // });
 
     _audioPlayer.onPlayerStateChanged.listen((state) {
       if (!mounted) return;
       setState(() {
         _audioPlayerState = state;
-        _songData.setPlaying(_audioPlayerState == AudioPlayerState.PLAYING);
+        _songData.setPlaying(_audioPlayerState == PlayerState);
       });
     });
 
-    _audioPlayer.onNotificationPlayerStateChanged.listen((state) {
-      if (!mounted) return;
-      setState(() {
-        _audioPlayerState = state;
-        _songData.setPlaying(_audioPlayerState == AudioPlayerState.PLAYING);
-      });
-    });
+    // _audioPlayer.onNotificationPlayerStateChanged.listen((state) {
+    //   if (!mounted) return;
+    //   setState(() {
+    //     _audioPlayerState = state;
+    //     _songData.setPlaying(_audioPlayerState == PlayerState.playing);
+    //   });
+    // });
   }
 
   String getSongUrl(Song s) {
@@ -143,27 +143,27 @@ class PlayerState extends State<Player> {
       url = getSongUrl(s);
     }
     if (url == _songData.url) {
-      int result = await _audioPlayer.setUrl(url);
-      if (result == 1) {
+      /*int result = await*/ _audioPlayer.setSourceUrl(url);
+      // if (result == 1) {
         _songData.setPlaying(true);
-      }
+      // }
     } else {
-      int result = await _audioPlayer.play(url);
-      if (result == 1) {
+      /*int result =*/ await _audioPlayer.play(UrlSource(url));
+      // if (result == 1) {
         _songData.setPlaying(true);
-      }
+      // }
       _songData.setUrl(url);
     }
   }
 
   void pause() async {
     final result = await _audioPlayer.pause();
-    if (result == 1) setState(() => _songData.setPlaying(false));
+    /*if (result == 1) */setState(() => _songData.setPlaying(false));
   }
 
   void resume() async {
     final result = await _audioPlayer.resume();
-    if (result == 1) setState(() => _songData.setPlaying(true));
+    /*if (result == 1)*/ setState(() => _songData.setPlaying(true));
   }
 
   void next() {
@@ -248,7 +248,7 @@ class PlayerState extends State<Player> {
                   _position.inSeconds < _duration.inSeconds)
               ? _position.inSeconds / _duration.inSeconds
               : 0.0,
-          activeColor: Theme.of(context).accentColor,
+          activeColor: Theme.of(context).appBarTheme.foregroundColor,
         ),
       ),
       Visibility(
@@ -285,13 +285,13 @@ class PlayerState extends State<Player> {
                 Icons.fast_rewind,
                 size: 25.0,
                 color: Theme.of(context).brightness == Brightness.dark
-                    ? Theme.of(context).accentColor
+                    ? Theme.of(context).appBarTheme.foregroundColor
                     : Color(0xFF787878),
               ),
             ),
             ClipOval(
                 child: Container(
-              color: Theme.of(context).accentColor.withAlpha(30),
+              color: Theme.of(context).appBarTheme.foregroundColor?.withAlpha(30),
               width: 70.0,
               height: 70.0,
               child: IconButton(
@@ -301,7 +301,7 @@ class PlayerState extends State<Player> {
                 icon: Icon(
                   _songData.isPlaying ? Icons.pause : Icons.play_arrow,
                   size: 30.0,
-                  color: Theme.of(context).accentColor,
+                  color: Theme.of(context).appBarTheme.foregroundColor,
                 ),
               ),
             )),
@@ -312,7 +312,7 @@ class PlayerState extends State<Player> {
                 Icons.fast_forward,
                 size: 25.0,
                 color: Theme.of(context).brightness == Brightness.dark
-                    ? Theme.of(context).accentColor
+                    ? Theme.of(context).appBarTheme.foregroundColor
                     : Color(0xFF787878),
               ),
             ),

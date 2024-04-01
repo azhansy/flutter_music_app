@@ -4,7 +4,7 @@ import 'package:flutter_music_app/ui/widget/app_bar.dart';
 import 'package:flutter_music_app/model/song_model.dart';
 
 class AlbumsPage extends StatefulWidget {
-  final Song data;
+  final Song? data;
 
   AlbumsPage({this.data});
   @override
@@ -28,12 +28,12 @@ class _AlbumsPageState extends State<AlbumsPage> {
                   height: MediaQuery.of(context).size.width * 0.5,
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(30.0),
-                      child: Container(child: Image.network(widget.data.pic))),
+                      child: Container(child: Image.network(widget.data?.pic ?? ''))),
                 )),
                 SizedBox(height: 20.0),
                 Center(
                   child: Text(
-                    widget.data.author,
+                    widget.data?.author ?? '',
                     style: TextStyle(fontSize: 12.0),
                   ),
                 ),
@@ -54,15 +54,15 @@ class _AlbumsPageState extends State<AlbumsPage> {
                           children: <Widget>[
                             Icon(
                               Icons.play_arrow,
-                              color: Theme.of(context).accentColor,
+                              // color: Theme.of(context).accentColor,
                             ),
                             SizedBox(
                               width: 5,
                             ),
                             Text(
                               'Play',
-                              style: TextStyle(
-                                  color: Theme.of(context).accentColor),
+                              // style: TextStyle(
+                                  // color: Theme.of(context).accentColor),
                             ),
                           ],
                         ),
@@ -92,7 +92,7 @@ class _AlbumsPageState extends State<AlbumsPage> {
                     ),
                   ],
                 ),
-                AlbumCarousel(input: widget.data.author),
+                AlbumCarousel(input: widget.data?.author ?? ''),
               ],
             ),
           ),

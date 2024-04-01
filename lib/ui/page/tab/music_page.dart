@@ -92,7 +92,7 @@ class _MusicPageState extends State<MusicPage>
               icon: downloadModel.isDownload(data)
                   ? Icon(
                       Icons.cloud_done,
-                      color: Theme.of(context).accentColor,
+                      // color: Theme.of(context).accentColor,
                       size: 20.0,
                     )
                   : Icon(

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_music_app/config/router_manager.dart' as rm;
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_music_app/config/provider_manager.dart';
@@ -15,8 +16,7 @@ void main() async {
   Provider.debugCheckInvalidValueType = null;
   WidgetsFlutterBinding.ensureInitialized();
   await StorageManager.init();
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
     runApp(MyApp());
   });
 }
@@ -26,8 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: providers,
-        child: Consumer2<ThemeModel, LocaleModel>(
-            builder: (context, themeModel, localeModel, child) {
+        child: Consumer2<ThemeModel, LocaleModel>(builder: (context, themeModel, localeModel, child) {
           return RefreshConfiguration(
             hideFooterWhenNotFull: true, //列表数据不满一页,不触发加载更多
             child: MaterialApp(
@@ -43,7 +42,7 @@ class MyApp extends StatelessWidget {
                 GlobalWidgetsLocalizations.delegate
               ],
               supportedLocales: S.delegate.supportedLocales,
-              onGenerateRoute: Router.generateRoute,
+              onGenerateRoute: rm.Router.generateRoute,
               initialRoute: RouteName.splash,
             ),
           );

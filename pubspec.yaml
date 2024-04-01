@@ -14,33 +14,40 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.2.2 <3.0.0"
+  sdk: ">=3.3.0 <4.0.0"
 
 dependencies:
-  shared_preferences: ^0.5.3+5
+  shared_preferences: ^2.0.6
   # 本地json对象存储
-  localstorage: ^3.0.0
+  localstorage: ^4.0.1+4
   #状态管理
   provider: ^3.0.0+1
   # UI
-  oktoast: ^2.1.7
+  oktoast: ^3.4.0
   pull_to_refresh: ^1.5.6
-  dio: ^3.0.1
-  device_info: ^0.4.0+1
-  package_info: ^0.4.0+6
+  dio: ^5.4.2+1
+  device_info: ^2.0.0
+  package_info: ^2.0.2
   shimmer: ^1.0.0
-  bubble_bottom_bar: ^1.2.0
-  audioplayers: ^0.14.0
+  bubble_bottom_bar: ^2.0.0
+  audioplayers: ^6.0.0
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2
+  cupertino_icons: ^1.0.6
   cached_network_image: ^2.0.0
-  http: ^0.11.3+17
-  path_provider: ^1.1.0
+  http: ^1.2.1
+  path_provider: 2.0.12
+  dio_http:
+
+dependency_overrides:
+  provider:
+  cached_network_image:
+  shimmer: ^1.0.0
+
 
 dev_dependencies:
   flutter_test:

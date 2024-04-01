@@ -61,7 +61,7 @@ class _TabNavigatorState extends State<TabNavigator> {
       bottomNavigationBar: Container(
         padding: EdgeInsets.all(10.0),
         decoration: BoxDecoration(
-          color: Theme.of(context).accentColor,
+          color: Theme.of(context).appBarTheme.foregroundColor,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(30.0),
             topRight: Radius.circular(30.0),
@@ -70,8 +70,8 @@ class _TabNavigatorState extends State<TabNavigator> {
         child: BubbleBottomBar(
           currentIndex: _selectedIndex,
           backgroundColor: Colors.transparent,
-          onTap: (int index) {
-            _pageController.jumpToPage(index);
+          onTap: (int? index) {
+            _pageController.jumpToPage(index ?? 0);
           },
           items: <BubbleBottomBarItem>[
             BubbleBottomBarItem(

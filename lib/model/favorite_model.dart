@@ -10,7 +10,7 @@ const String kFavoriteList = 'kFavoriteList';
 class FavoriteListModel extends ViewStateListModel<Song> {
   FavoriteModel favoriteModel;
 
-  FavoriteListModel({this.favoriteModel});
+  FavoriteListModel({required this.favoriteModel});
   @override
   Future<List<Song>> loadData() async {
     LocalStorage localStorage = LocalStorage(kLocalStorageSearch);
@@ -26,7 +26,7 @@ class FavoriteListModel extends ViewStateListModel<Song> {
 }
 
 class FavoriteModel with ChangeNotifier {
-  List<Song> _favoriteSong;
+  List<Song> _favoriteSong = [];
   List<Song> get favoriteSong => _favoriteSong;
 
   setFavorites(List<Song> favoriteSong) {

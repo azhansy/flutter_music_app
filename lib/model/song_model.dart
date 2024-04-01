@@ -7,16 +7,16 @@ import 'package:flutter_music_app/service/base_repository.dart';
 class SongListModel extends ViewStateRefreshListModel<Song> {
   final String input;
 
-  SongListModel({this.input});
+  SongListModel({required this.input});
 
   @override
-  Future<List<Song>> loadData({int pageNum}) async {
+  Future<List<Song>> loadData({int pageNum = 0}) async {
     return await BaseRepository.fetchSongList(input, pageNum);
   }
 }
 
 class SongModel with ChangeNotifier {
-  String _url;
+  String _url = '';
   String get url => _url;
   setUrl(String url) {
     _url = url;
@@ -26,7 +26,7 @@ class SongModel with ChangeNotifier {
   AudioPlayer _audioPlayer = AudioPlayer();
   AudioPlayer get audioPlayer => _audioPlayer;
 
-  List<Song> _songs;
+  List<Song> _songs = [];
 
   bool _isPlaying = false;
   bool get isPlaying => _isPlaying;
@@ -112,14 +112,14 @@ class SongModel with ChangeNotifier {
     return _songs[_currentSongIndex];
   }
 
-  Duration _position;
+  Duration _position = Duration();
   Duration get position => _position;
   void setPosition(Duration position) {
     _position = position;
     notifyListeners();
   }
 
-  Duration _duration;
+  Duration _duration= Duration();
   Duration get duration => _duration;
   void setDuration(Duration duration) {
     _duration = duration;
